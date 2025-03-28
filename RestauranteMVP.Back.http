@@ -1,0 +1,6 @@
+@RestauranteMVP.Back_HostAddress = http://localhost:5079
+
+GET {{RestauranteMVP.Back_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
