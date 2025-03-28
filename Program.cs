@@ -1,4 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
+using MinimalApiDapper.Endpoints;
+using RestauranteMVP.Back.Data;
+using RestauranteMVP.Back.Services;
 using RestauranteMVP.Back.Utils;
 using System.Data;
 
@@ -14,13 +17,19 @@ builder.Services.AddCors();
 builder.Services.AddScoped<IDbConnection>(sp =>
     new SqlConnection(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-var app = builder.Build();
+// Registrar repositorios
+builder.Services.AddScoped<MenuRepository>();
+
+// Registrar servicios
+builder.Services.AddScoped<MenuService>();
 
 // Registrar los mapeos de Dapper FluentMap
 MappingConfig.ConfigureMappings(builder.Services);
 
-// 🔹 Registrar los servicios 
-//builder.Services.AddScoped<IMenuService, MenuService>();
+var app = builder.Build();
+
+// Registrar endpoints
+MenuEndpoint.RegisterEndpoints(app);
 
 
 // Configure the HTTP request pipeline.
