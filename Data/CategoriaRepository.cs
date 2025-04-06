@@ -2,56 +2,59 @@
 using RestauranteMVP.Back.Models;
 using System.Data;
 
+
 namespace RestauranteMVP.Back.Data
 {
-    public class MenuRepository
+    public class CategoriaRepository
     {
         private readonly IDbConnection _dbConnection;
 
-        public MenuRepository(IDbConnection dbConnection)
+        public CategoriaRepository(IDbConnection dbConnection)
         {
             _dbConnection = dbConnection;
         }
 
-        public async Task<IEnumerable<Menu>> GetAllAsync()
+        public async Task<IEnumerable<Categoria>> GetAllAsync()
         {
-            return await _dbConnection.QueryAsync<Menu>(
-                "Menu_Listar",
+            return await _dbConnection.QueryAsync<Categoria>(
+                "Categoria_Listar",
                 commandType: CommandType.StoredProcedure
             );
         }
 
-        public async Task<Menu> GetByIdAsync(int id)
+        public async Task<Categoria> GetByIdAsync(int id)
         {
-            return await _dbConnection.QueryFirstOrDefaultAsync<Menu>(
-                "Menu_Obtener_Por_Id",
+            return await _dbConnection.QueryFirstOrDefaultAsync<Categoria>(
+                "Categoria_Obtener_Por_Id",
                 new { Id = id },
                 commandType: CommandType.StoredProcedure
-            ) ?? new Menu();
+            ) ?? new Categoria();
         }
 
-        public async Task<int> AddAsync(Menu menu)
+        public async Task<int> AddAsync(Categoria categoria)
         {
             return await _dbConnection.ExecuteScalarAsync<int>(
-                "Insert_Menu",
+                "Insert_Categoria",
                 new
                 {
-                    Menu_Nombre = menu.Nombre,
-                    Menu_Descripcion = menu.Descripcion
+                    Nombre = categoria.Nombre,
+                    Descripcion = categoria.Descripcion,
+                    Encargado_ID = categoria.EncargadoId
                 },
                 commandType: CommandType.StoredProcedure
             );
         }
 
-        public async Task<bool> UpdateAsync(int id, Menu menu)
+        public async Task<bool> UpdateAsync(int id, Categoria categoria)
         {
             var result = await _dbConnection.ExecuteAsync(
-                "Menu_Update",
+                "Update_Categoria",
                 new
                 {
-                    Menu_Nombre = menu.Nombre,
-                    Menu_Descripcion = menu.Descripcion,
-                    Menu_ID = id
+                    Categoria_ID = id,
+                    Categoria_Nombre = categoria.Nombre,
+                    Categoria_Descripcion = categoria.Descripcion
+
                 },
                 commandType: CommandType.StoredProcedure
             );
@@ -61,12 +64,13 @@ namespace RestauranteMVP.Back.Data
         public async Task<bool> DeleteAsync(int id)
         {
             var result = await _dbConnection.ExecuteAsync(
-                "Menu_Delete",
-                new { Menu_ID = id },
+                "Delete_Categoria",
+                new { Categoria_ID = id },
                 commandType: CommandType.StoredProcedure
             );
             return result > 0;
         }
     }
+
 
 }
