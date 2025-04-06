@@ -10,7 +10,7 @@ namespace RestauranteMVP.Back.Utils
             FluentMapper.Initialize(config =>
             {
                 config.AddMap(new MenuMapper());
-                config.AddMap(new IngredienteMapper());
+                config.AddMap(new IngredientesMapper());
                 config.AddMap(new EncargadoMapper());
                 config.AddMap(new CategoriaMapper());
                 config.AddMap(new PlatoMapper());

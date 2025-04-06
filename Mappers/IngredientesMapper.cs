@@ -3,9 +3,9 @@ using RestauranteMVP.Back.Models;
 
 namespace RestauranteMVP.Back.Mappers
 {
-    public class IngredienteMapper : EntityMap<Ingrediente>
+    public class IngredientesMapper : EntityMap<Ingredientes>
     {
-        public IngredienteMapper()
+        public IngredientesMapper()
         {
             Map(i => i.IngredienteId).ToColumn("Ingrediente_ID");
             Map(i => i.Nombre).ToColumn("Ingrediente_Nombre");

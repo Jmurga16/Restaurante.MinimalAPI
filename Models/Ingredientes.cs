@@ -1,6 +1,6 @@
 ﻿namespace RestauranteMVP.Back.Models
 {
-    public class Ingrediente
+    public class Ingredientes
     {
         public int IngredienteId { get; set; }
         public string Nombre { get; set; } = string.Empty;
