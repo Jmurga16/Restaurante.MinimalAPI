@@ -3,8 +3,9 @@
     public class MenuPlato
     {
         public int MenuId { get; set; }
-        public int PlatoId { get; set; }        
-        //public virtual Menu Menu { get; set; }        
-        //public virtual Plato Plato { get; set; }
+        public int PlatoId { get; set; }
+        public List<Plato>? Platos { get; set; } = new List<Plato>();
+        public List<Menu>? Menus { get; set; } = new List<Menu>();
+
     }
 }

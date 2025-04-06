@@ -4,8 +4,8 @@
     {
         public int RecetaId { get; set; }
         public int IngredienteId { get; set; }
-        public decimal CantidadRequerida { get; set; }        
-        //public virtual Receta Receta { get; set; }        
-        //public virtual Ingrediente Ingrediente { get; set; }
+        public decimal CantidadRequerida { get; set; }
+        public List<Receta> Recetas { get; set; } = new List<Receta>();
+        public List<Ingredientes> Ingredientes { get; set; } = new List<Ingredientes>();
     }
 }
