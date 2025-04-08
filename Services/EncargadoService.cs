@@ -36,5 +36,10 @@ namespace RestauranteMVP.Back.Services
         {
             return await _encargadoRepository.DeleteAsync(id);
         }
+
+        public async Task<IEnumerable<Encargado>> GetAllWithCategoriaAsync()
+        {
+            return await _encargadoRepository.GetAllWithCategoriaAsync();
+        }
     }
 }

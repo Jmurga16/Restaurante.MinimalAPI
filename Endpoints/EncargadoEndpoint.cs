@@ -1,5 +1,6 @@
 ﻿using RestauranteMVP.Back.Models;
 using RestauranteMVP.Back.Services;
+using System.Data;
 
 namespace RestauranteMVP.Back.Endpoints
 {
@@ -35,6 +36,12 @@ namespace RestauranteMVP.Back.Endpoints
                 var deleted = await encargadoService.DeleteAsync(id);
                 return deleted ? Results.NoContent() : Results.NotFound();
             });
+
+            app.MapGet("/encargado-categorias", async (EncargadoService encargadoService) =>
+            {
+                return Results.Ok(await encargadoService.GetAllWithCategoriaAsync());
+            });
+
         }
     }
 

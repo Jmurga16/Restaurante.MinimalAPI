@@ -77,6 +77,39 @@ namespace RestauranteMVP.Back.Data
             );
             return result > 0;
         }
+
+        public async Task<IEnumerable<Encargado>> GetAllWithCategoriaAsync()
+        {
+            var sql = "Encargado_Categoria_Listar";
+
+            var encargadoDictionary = new Dictionary<int, Encargado>();
+
+            var result = await _dbConnection.QueryAsync<Encargado, Categoria, Encargado>(
+                sql,
+                (encargado, categoria) =>
+                {
+
+                    if (!encargadoDictionary.TryGetValue(encargado.EncargadoId, out var encargadoExistente))
+                    {
+                        encargadoExistente = encargado;
+                        encargadoExistente.Categorias = new List<Categoria>();
+                        encargadoDictionary.Add(encargado.EncargadoId, encargadoExistente);
+                    }
+
+                    if (categoria != null && encargadoExistente.Categorias != null)
+                    {
+                        encargadoExistente.Categorias.Add(categoria);
+                    }
+
+                    return encargadoExistente;
+                },
+                splitOn: "Categoria_ID",
+                commandType: CommandType.StoredProcedure
+            );
+
+            return encargadoDictionary.Values;
+        }
+
     }
 
 }
