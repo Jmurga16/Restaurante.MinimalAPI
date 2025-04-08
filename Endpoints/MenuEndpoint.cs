@@ -35,5 +35,10 @@ public static class MenuEndpoint
             var deleted = await menuService.DeleteAsync(id);
             return deleted ? Results.NoContent() : Results.NotFound();
         });
+
+        app.MapGet("/menu-plato", async (MenuService menuService) =>
+        {
+            return Results.Ok(await menuService.GetMenuPlatoAsync());
+        });
     }
 }

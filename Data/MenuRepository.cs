@@ -67,6 +67,37 @@ namespace RestauranteMVP.Back.Data
             );
             return result > 0;
         }
+
+        public async Task<List<MenuPlato>> GetMenuPlatoAsync()
+        {
+            var menuPlatosDict = new Dictionary<int, MenuPlato>();
+
+            var result = await _dbConnection.QueryAsync<Menu, Plato, MenuPlato>(
+                "Menu_Plato_Listar",
+                (menu, plato) =>
+                {
+                    // Verificar si el Menu ya existe en el diccionario
+                    if (!menuPlatosDict.TryGetValue(menu.MenuId, out var menuPlato))
+                    {
+                        // Crear un nuevo MenuPlato si no existe
+                        menuPlato = new MenuPlato
+                        {
+                            MenuId = menu.MenuId,
+                            Menus = new List<Menu> { menu }
+                        };
+                        menuPlatosDict.Add(menu.MenuId, menuPlato);
+                    }
+
+                    menuPlatosDict[menu.MenuId].Platos.Add(plato);
+
+                    return menuPlato;
+                },
+                splitOn: "Plato_ID",
+                commandType: CommandType.StoredProcedure
+            );
+
+            return menuPlatosDict.Values.ToList();
+        }
     }
 
 }

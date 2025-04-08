@@ -36,6 +36,11 @@ namespace RestauranteMVP.Back.Services
         {
             return await _menuRepository.DeleteAsync(id);
         }
+
+        public async Task<List<MenuPlato>> GetMenuPlatoAsync()
+        {
+            return await _menuRepository.GetMenuPlatoAsync();
+        }
     }
 
 }
