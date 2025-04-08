@@ -36,6 +36,10 @@ namespace RestauranteMVP.Back.Services
         {
             return await _platoRepository.DeleteAsync(id);
         }
+        public async Task<RecetaIngrediente> GetRecetaIngredientesByPlatoIdAsync(int platoId)
+        {
+            return await _platoRepository.GetRecetaIngredientesByPlatoIdAsync(platoId);
+        }
     }
 
 }

@@ -35,6 +35,18 @@ namespace RestauranteMVP.Back.Endpoints
                 var deleted = await platoService.DeleteAsync(id);
                 return deleted ? Results.NoContent() : Results.NotFound();
             });
+
+            app.MapGet("/plato/{platoId}/receta", async (int platoId, PlatoService platoService) =>
+            {
+                var recetaIngredientes = await platoService.GetRecetaIngredientesByPlatoIdAsync(platoId);
+
+                if (recetaIngredientes == null)
+                {
+                    return Results.NotFound("No se encontraron recetas o ingredientes para este plato.");
+                }
+
+                return Results.Ok(recetaIngredientes);
+            });
         }
     }
 }
