@@ -27,8 +27,7 @@ namespace RestauranteMVP.Back.Endpoints
             app.MapPut("/ingredientes/{id}", async (int id, Ingredientes ingredientes, IngredientesService ingredientesService) =>
             {
                 var updated = await ingredientesService.UpdateAsync(id, ingredientes);
-                return updated ? Results.NoContent() : Results.NotFound();
-            });
+                return updated ? Results.Ok(ingredientes) : Results.NotFound();            });
 
             app.MapDelete("/ingredientes/{id}", async (int id, IngredientesService ingredientesService) =>
             {
