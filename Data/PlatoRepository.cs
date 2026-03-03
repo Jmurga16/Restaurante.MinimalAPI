@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Microsoft.Data.SqlClient;
 using RestauranteMVP.Back.Models;
 using System.Data;
 

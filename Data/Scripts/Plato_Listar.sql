@@ -1,0 +1,7 @@
+--OBTENER PLATOS
+CREATE PROCEDURE [dbo].[Plato_Listar] 
+
+AS
+BEGIN
+    SELECT * FROM Plato
+END

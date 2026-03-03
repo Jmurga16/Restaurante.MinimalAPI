@@ -1,0 +1,7 @@
+--OBTENER MENUS
+CREATE PROCEDURE [dbo].[Menu_Listar] 
+
+AS
+BEGIN
+    SELECT * FROM Menu
+END

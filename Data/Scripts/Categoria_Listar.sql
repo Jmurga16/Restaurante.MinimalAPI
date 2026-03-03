@@ -1,0 +1,7 @@
+--OBTENER CATEGORIAS
+CREATE PROCEDURE [dbo].[Categoria_Listar] 
+
+AS
+BEGIN
+    SELECT * FROM Categoria
+END

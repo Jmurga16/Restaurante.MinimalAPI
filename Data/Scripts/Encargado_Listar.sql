@@ -1,0 +1,7 @@
+--OBTENER ENCARGADOS
+CREATE PROCEDURE [dbo].[Encargado_Listar] 
+
+AS
+BEGIN
+    SELECT * FROM Encargado
+END

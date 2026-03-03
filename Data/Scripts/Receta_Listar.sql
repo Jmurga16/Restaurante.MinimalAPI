@@ -1,0 +1,7 @@
+--OBTENER RECETAS
+CREATE PROCEDURE [dbo].[Receta_Listar] 
+
+AS
+BEGIN
+    SELECT * FROM Receta
+END
